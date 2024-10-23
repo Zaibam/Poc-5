@@ -1,18 +1,18 @@
 # Poc-5
 # Componentes
-•Pages: Esta é a pasta mais importante, onde você define as rotas do seu aplicativo. Cada arquivo dentro desta pasta se torna uma rota.
+• Pages: Esta é a pasta mais importante, onde você define as rotas do seu aplicativo. Cada arquivo dentro desta pasta se torna uma rota.
 
-•Public: Contém arquivos estáticos, como imagens, fontes e ícones, que podem ser acessados diretamente via URL.
+• Public: Contém arquivos estáticos, como imagens, fontes e ícones, que podem ser acessados diretamente via URL.
 
-•Styles: Normalmente usada para armazenar arquivos de estilo CSS ou SCSS.
+• Styles: Normalmente usada para armazenar arquivos de estilo CSS ou SCSS.
 
-•Components: Embora não seja criada automaticamente, é comum adicionar esta pasta para organizar componentes reutilizáveis.
+• Components: Embora não seja criada automaticamente, é comum adicionar esta pasta para organizar componentes reutilizáveis.
 
-•Api: Dentro da pasta pages, você pode ter uma subpasta api para definir rotas de API.
+• Api: Dentro da pasta pages, você pode ter uma subpasta api para definir rotas de API.
 
-•Componentes de Cliente (Client Components): Esses componentes permitem criar interfaces de usuário interativas que são pré-renderizadas no servidor e executadas no navegador. Eles podem usar JavaScript do cliente para manipular o DOM e responder a eventos do usuário.
+• Componentes de Cliente (Client Components): Esses componentes permitem criar interfaces de usuário interativas que são pré-renderizadas no servidor e executadas no navegador. Eles podem usar JavaScript do cliente para manipular o DOM e responder a eventos do usuário.
 
-•Componentes de Servidor (Server Components): São renderizados no servidor e enviados ao cliente como HTML estático. Isso melhora o desempenho inicial da página, pois o navegador não precisa esperar pelo JavaScript para exibir o conteúdo.
+• Componentes de Servidor (Server Components): São renderizados no servidor e enviados ao cliente como HTML estático. Isso melhora o desempenho inicial da página, pois o navegador não precisa esperar pelo JavaScript para exibir o conteúdo.
 
 
 # NextJS 14
@@ -88,3 +88,67 @@ export default function Home() {
   );
 }
 ```
+
+
+# Estilo CSS (global e módulo). 
+## Utilização do CSS Global na pasta "globals.css":
+• .container adiciona um padding de 20px a elementos com a classe container.
+
+• "h1" ajusta o tamanho da fonte, alinhamento, cor, e espaçamento vertical dos títulos de nível 1.
+
+• "body" define a cor de fundo da página inteira.
+
+• "div" centraliza o texto e adiciona espaçamento vertical aos elementos "div".
+
+• ".header" estiliza um elemento com a classe "header" com cor de fundo, posição no topo e uma fonte específica.
+### Demonstrando a aplicação na prática: 
+```css
+.container {  padding: 20px;}
+h1 {  font-size: 38px;  text-align: center;  padding-top: 10px;  padding-bottom: 20px;  color: antiquewhite;  }
+body {  background-color: antiquewhite;}
+div{  text-align: center;  padding-top: 20px;  padding-bottom: 20px;}
+.header{  background-color: rgb(115, 71, 141);  top: 5px;  font-family: 'Times New Roman', Times, serif;  }
+```
+## Utilização do CSS Módulo na pasta "page.module.css":
+• Este CSS é mais modular, com variáveis CSS (custom properties) e regras específicas para componentes.
+
+• Variáveis: Usam variáveis CSS (--gray-rgb, --button-primary-hover, etc.) para definir cores e estilos reutilizáveis.
+
+• Encapsulamento de Estilos: ".page", ".main" e outros são aplicados apenas ao componente que importar este módulo CSS.
+
+• Responsividade: Inclui media queries para ajustar os estilos com base em preferências de esquema de cores (prefers-color-scheme: dark).
+### Demonstrando a aplicação na prática:
+```css
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  align-items: center;
+  justify-items: center;
+  min-height: 100svh;
+  padding: 80px;
+  gap: 64px;
+  font-family: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  grid-row-start: 2;
+}
+```
+
